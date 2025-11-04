@@ -155,26 +155,28 @@ def extract_all_features(word):
     
 
 #use the function in apply to determine the tag and creates a panda series (kind of like a list)
-tag = df.apply(lambda row: label_is_true(row), axis = 1)
+tag = df.apply(lambda row: label_is_true(row), axis=1)
 
 #creates a new column that will contain either "ENG", "FIL", or "OTH"
 df['three_class_label'] = tag.apply(map_to_three_classes)
 
 # --- Test for Task 2.5 ---
-print("\nTesting Master Feature Extractor:")
-test_words = ['naglunch', 'kumain', 'corrupt', 'playing', 'Manila', '.', '2023']
+#if __name__ == "__main__":
+    #print("\nTesting Master Feature Extractor:")
+    #test_words = ['naglunch', 'kumain', 'corrupt', 'playing', 'Manila', '.', '2023']
 
-for word in test_words:
-    features = extract_all_features(word)
-    print(f"\nWord: '{word}' ({len(features)} features extracted)")
-    
-    # Let's just show a few features to prove it works
-    print(f"  ... has_nag_prefix: {features.get('has_nag_prefix')}")
-    print(f"  ... has_ing_suffix: {features.get('has_ing_suffix')}")
-    print(f"  ... vowel_ratio: {features.get('vowel_ratio')}")
-    print(f"  ... is_number: {features.get('is_number')}")
+    #for word in test_words:
+        #features = extract_all_features(word)
+        #print(f"\nWord: '{word}' ({len(features)} features extracted)")
 
+        # Let's just show a few features to prove it works
+        #print(f"  ... has_nag_prefix: {features.get('has_nag_prefix')}")
+        #print(f"  ... has_ing_suffix: {features.get('has_ing_suffix')}")
+        #print(f"  ... vowel_ratio: {features.get('vowel_ratio')}")
+        #print(f"  ... is_number: {features.get('is_number')}")
 
-
-
-
+# Creates a new CVS file named "processed_data.csv" to be read by the training model.
+print("PHASE 2: FILE 'map_tags.py':")
+df.to_csv("processed_data.csv", index=False)
+print("Data saved as 'processed_data.csv'.")
+print(f"Total rows: {len(df)}")
